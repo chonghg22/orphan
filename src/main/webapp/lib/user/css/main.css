@@ -1,0 +1,299 @@
+@charset "utf-8";
+
+/*메인공통*/
+.main-content {max-width: 1430px; margin:0 auto; padding:0 15px;}
+.main-content h2 {font-size: 3.3rem; color:#333; margin-bottom: 40px; text-align: center; font-weight: 500;}
+
+/*메인비주얼*/
+.main-visual {position: relative; max-width: 1920px; margin:0 auto; height: 645px;}
+.main-visual .txt {font-size: 4.8rem; color:#fff; position: absolute; top:50%; left:10%; transform: translateY(-50%); z-index: 1; width: 100%; line-height: 1.4;}
+.main-visual .slide-img {height: 645px;}
+.main-visual .slide-img a {display: block; width: 1920px; height: 645px; top:0; left: 50%; transform: translateX(-50%); position: absolute;}
+.main-visual .slide-img a img {width:auto; height: 100%; }
+.main-visual .side-nav {position: absolute; top:50%; right: 0; transform: translateY(-50%); z-index:2
+;}
+.main-visual .side-nav li {margin-bottom: 1px;}
+.main-visual .side-nav li a {display: block; background: rgba(0,0,0,0.7); color:#fff; padding:30px 40px; min-width: 370px; font-size: 2.2rem; position: relative; transition: all .4s ease}
+.main-visual .side-nav li a:before {content: ''; display: block; width: 20px; height: 1px; position: absolute; top:50%; left: 0; transform: translateY(-50%); background: #fff; opacity: 1; transition: all .4s ease}
+.main-visual .side-nav li a:after {content: ''; width: 54px; height: 15px; background: url(../img/main/side-btn-arr.png) no-repeat 0 0; background-size: contain; display: block; position: absolute; top:50%; right: 10px; transform: translateY(-50%); opacity: 0; transition: all .4s ease}
+.main-visual .side-nav li a:hover {background: #e60012}
+.main-visual .side-nav li a:hover:before {opacity: 0; width: 0}
+.main-visual .side-nav li a:hover:after {opacity: 1; right: 30px;}
+
+/*메인검색*/
+.main-search {margin:70px 0;}
+
+/*메인 퀵배너*/
+.main-quick {overflow: hidden; text-align: center; margin:70px 0;}
+.main-quick li {display: inline-block; vertical-align: top; margin:0 2%;}
+.main-quick li a {display: block; padding-top: 190px; width: 165px; background-size: auto; background-repeat: no-repeat; background-position: 50% 0; font-size: 1.9rem; text-align: center; line-height: 1.4; transition: all .4s ease;}
+.main-quick li a:hover {background-position: 50% 10px; color:#000;}
+.main-quick li:nth-of-type(1) a {background-image: url(../img/main/quick-ico1.png)}
+.main-quick li:nth-of-type(1) a:hover {background-image: url(../img/main/quick-ico1-on.png)}
+.main-quick li:nth-of-type(2) a {background-image: url(../img/main/quick-ico2.png)}
+.main-quick li:nth-of-type(2) a:hover {background-image: url(../img/main/quick-ico2-on.png)}
+.main-quick li:nth-of-type(3) a {background-image: url(../img/main/quick-ico3.png)}
+.main-quick li:nth-of-type(3) a:hover {background-image: url(../img/main/quick-ico3-on.png)}
+.main-quick li:nth-of-type(4) a {background-image: url(../img/main/quick-ico4.png)}
+.main-quick li:nth-of-type(4) a:hover {background-image: url(../img/main/quick-ico4-on.png)}
+.main-quick li:nth-of-type(5) a {background-image: url(../img/main/quick-ico5.png)}
+.main-quick li:nth-of-type(5) a:hover {background-image: url(../img/main/quick-ico5-on.png)}
+.main-quick li:nth-of-type(6) a {background-image: url(../img/main/quick-ico6.png)}
+.main-quick li:nth-of-type(6) a:hover {background-image: url(../img/main/quick-ico6-on.png)}
+
+/*메인cs*/
+.main-cs {overflow: hidden}
+.main-cs .section {float: left; width: 31.3%; margin-right: 3%; position: relative;}
+.main-cs .cs-banner a {display: block; background-position: 80% 50%; background-repeat: no-repeat; background-size: contain; height: 275px;}
+.main-cs .cs-banner p {position: absolute; top:60%; left:35px; font-size: 2.2rem; color:#000; line-height: 1.4; transform: translateY(-50%)}
+.main-cs .cs-banner p:after {content: ''; display: block; width: 75px; height: 17px; background: url(../img/main/cs-arr.png) no-repeat 0 0; background-size: contain;  margin-top: 30px;}
+.main-cs .mypage a {background-image: url(../img/main/mypage-bg.jpg); background-size: cover;}
+.main-cs .faq a {background-image: url(../img/main/faq-bg.jpg);  background-size: cover; background-position: right 50% }
+.main-cs .notice {margin-right: 0;}
+.main-cs .notice h2 {font-size: 2.4rem; border-bottom: 1px solid #999; padding-bottom: 20px; margin-bottom: 10px; text-align: left}
+.main-cs .notice .more-btn {position: absolute; top:0; right: 0; color:#005b9e;}
+.main-cs .notice-list li {border-bottom: 1px dotted #ccc;}
+.main-cs .notice-list li a {display: block; padding:11px 0; font-size: 1.7rem; line-height: 1.4; position: relative}
+.main-cs .notice-list li a strong {color:#666; width: calc(100% - 150px); text-overflow: ellipsis;  white-space: nowrap;  overflow: hidden; vertical-align: middle;}
+.main-cs .notice-list li a .date {position: absolute; top:50%; right: 0; transform: translateY(-50%)}
+.main-cs .notice-list li a:hover strong {color:#005b9e; text-decoration: underline;}
+
+/*메인현황*/
+.status-wrap {border:1px solid #005b9e; overflow: hidden}
+.status-wrap .section {float: left; width: 50%; overflow: hidden;}
+.status-wrap .area-map {float: left; width: calc(100% - 220px)}
+.status-wrap .area-list {float: right; width: 220px; background: #005b9e; color:#fff; padding:20px 10px; height: 650px; text-align: left;}
+.status-wrap .area-list .control {text-align: center; position: relative; margin-bottom: 30px;}
+.status-wrap .area-list .control .direction button {width: 28px; height: 28px; }
+.status-wrap .area-list .control .direction .btn-prev {background: url(../img/main/status-arr-prev.png) no-repeat 0 0; margin-right: 40px;}
+.status-wrap .area-list .control .direction .btn-next {background: url(../img/main/status-arr-next.png) no-repeat 0 0; margin-left: 40px;}
+.status-wrap .area-list .control .pager {text-align: center; position: absolute; top:50%; left:50%; transform: translate(-50%,-50%)}
+.status-wrap .area-list .control .pager a {width: 15px; height: 15px; border:2px solid #fff; border-radius: 100px; background: transparent; margin:0 2px;}
+.status-wrap .area-list .control .pager a.on {background: #fff;}
+
+.status-wrap .area-list .list {overflow: hidden; padding:0 5%;}
+.status-wrap .area-list .list li {float: left; width: 46%; margin: 1% 2%;}
+.status-wrap .area-list .list li a {display: inline-block;  padding:9px 15px; font-size: 1.7rem; color:#fff; transition: all .4s ease; }
+.status-wrap .area-list .list li a:hover,
+.status-wrap .area-list .list li a.on {background: #99ccff; border-radius: 60px; color:#333;}
+.status-wrap .status-right {padding:35px 60px;}
+.status-wrap .status-right h3 {font-size: 2.4rem; color:#006699; margin-bottom: 40px; font-weight: 500;}
+.status-wrap .status-detail {float: left; width: 42%; border-bottom: 1px solid #ccc;}
+.status-wrap .status-detail li {border:1px solid #ccc; border-bottom: 0; padding:25px; color:#333; }
+.status-wrap .status-detail li .category {font-size: 2rem; padding:10px 25px; border-radius: 30px;}
+.status-wrap .status-detail li p {margin-bottom: 0; font-size: 3.3rem; text-align: right; margin-top: 20px;}
+.status-wrap .status-detail li p strong {font-weight: 300; font-size: 4.5rem; }
+.status-wrap .status-list {float: left; width: 51%; margin-left: 7%; height: 485px}
+.status-wrap .status-list ul li {border-radius: 30px;background: none !important; transition: all .4s ease; }
+.status-wrap .status-list ul li.bg-sky:hover {background: #99ccff!important;}
+.status-wrap .status-list ul li.bg-green:hover {background: #abdc15!important;}
+.status-wrap .status-list ul li.bg-yellow:hover {background: #ffcc00!important;}
+.status-wrap .status-list ul li:hover .category {background: #fff !important;}
+.status-wrap .status-list ul li a {display: block; padding:7px; font-size: 1.7rem; color:#333; }
+.status-wrap .status-list ul li .category {padding:0px 16px; height: 38px; line-height: 38px; border-radius: 30px;  margin-right: 5px; transition: all .4s ease; display: inline-block; vertical-align: middle;}
+.status-wrap .status-list ul li strong {font-weight: 300; word-break: break-all; display:inline-block; vertical-align: middle; padding:0 10px; line-height: 1.4; width: calc(100% - 80px)}
+.status-wrap .status-list .no-list {margin-top: 130px}
+.status-wrap .mobile-select {padding:10px; display: none; }
+.status-wrap .mobile-select select {border:0; background-color: #eee; width: 100%;}
+
+/*스크롤*/
+.mCS-dark.mCSB_scrollTools .mCSB_draggerRail{ background-color: #000; background-color: rgba(0,0,0,0.15); }
+.mCS-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background-color: #000; background-color: rgba(0,0,0,0.15); }
+.mCS-dark.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{ background-color: rgba(0,91,158,.85); }
+.mCS-dark.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-dark.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{ background-color: rgba(0,91,158,0.9); }
+.mCSB_inside > .mCSB_container {margin-right: 10px; }
+
+/*지도*/
+.map-guide {position: relative; z-index: 3}
+.map-guide area {outline: none;}
+.area-map {position: relative; }
+.area-map .map {position: absolute; top:30px; left: 50%; transform: translateX(-50%); width: 417px; height: 583px; background: url(../img/main/map-bg.png) no-repeat 0 0}
+.area-map a {position: absolute; display: inline-block; }
+.area-map a img {max-width: 100%; opacity: 0; transition: all .4s ease;}
+.area-map a.hover img {opacity: 0.3}
+.area-map a.on img {opacity: 1;}
+.area-map .btnSeoul { top:18%; left: 20.9%; z-index: 3}
+.area-map .btnGyeonggi { top:5.6%; left: 12.3%; }
+.area-map .btnIncheon { top:18.5%; left: 15.2%;}
+.area-map .btnGangwon { top:0.3%; left: 31%; z-index: 3}
+.area-map .btnChungbuk { top:30%; left: 3.3%; }
+.area-map .btnChungnam { top:29%; left: 31%; }
+.area-map .btnSejong { top:36%; left: 23.8%; z-index: 3}
+.area-map .btnDaejeon { top:42.8%; left: 28.8%; z-index: 3}
+.area-map .btnGyeongbuk { top:27.8%; left: 42.8%;}
+.area-map .btnGyeongnam { top:56.1%; left: 34.5%; }
+.area-map .btnDaegu { top:54.7%; left: 54.2%; z-index: 3}
+.area-map .btnUlsan { top:61.4%; left: 68.8%; z-index: 3}
+.area-map .btnBusan { top:68.3%; left: 63.5%; z-index: 3}
+.area-map .btnJeonbuk { top:49.5%; left: 8.3%; }
+.area-map .btnJeonnam { top:63%; left: 1.6%; }
+.area-map .btnGwangju { top:67.9%; left: 12.2%; z-index: 3}
+.area-map .btnJeju { top:92%; left: 0%; }
+.area-map a .bubble {position: absolute; background: #ff9933; font-size: 1.5rem; color:#fff; text-align: center; padding:8px 14px; z-index: 2; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); opacity: 0; transition: all .4s ease; margin-top: 15px;}
+.area-map a .bubble:after {content: ''; display: block; border:12px solid transparent; border-left: 12px solid #ff9933; position: absolute; bottom: -12px; left: 0; }
+.area-map a.on .bubble {display: block; opacity: 1; margin-top: 0;}
+.area-map a.hover .bubble {display: block; opacity: 1; margin-top: 0; z-index:3}
+.area-map .btnSeoul .bubble {top:-100%; left:30%;}
+.area-map .btnGyeonggi .bubble {top:10%; left:40%;}
+.area-map .btnIncheon .bubble {top:-100%; left:30%;}
+.area-map .btnGangwon .bubble {top:30%; left:50%;}
+.area-map .btnChungbuk .bubble {top:20%; left:40%;}
+.area-map .btnChungnam .bubble {top:10%; left:30%;}
+.area-map .btnSejong .bubble {top:-70%; left:40%;}
+.area-map .btnDaejeon .bubble {top:-80%; left:40%;}
+.area-map .btnGyeongbuk .bubble {top:30%; left:40%;}
+.area-map .btnGyeongnam .bubble {top:30%; left:30%;}
+.area-map .btnDaegu .bubble {top:-60%; left:30%;}
+.area-map .btnUlsan .bubble {top:-60%; left:30%;}
+.area-map .btnBusan .bubble {top:-60%; left:40%;}
+.area-map .btnJeonbuk .bubble {top:20%; left:30%;}
+.area-map .btnJeonnam .bubble {top:40%; left:30%;}
+.area-map .btnGwangju .bubble {top:-140%; left:30%;}
+.area-map .btnJeju .bubble {top:-30%; left:30%;}
+
+/*메인팝업*/
+.layerpopup {position:absolute; top:25%; left:0; right:0; margin:0 auto; z-index:2;  }
+.layerpopup img {display:block; width:100%;}
+.layerpopup_con .title {background: #005b9e; color:#fff; padding:15px; font-size: 2rem; text-align: center; line-height: 1.4;}
+.layerpopup_con {position:absolute;top:130px;left: 50%;min-width: 320px;max-width: 320px;z-index:2;transform: translateX(-50%);background: #fff;text-align: c;}
+.layerpopup_con .footer {background:#000; color:#ccc; padding:9px 15px; overflow:hidden; clear:both; text-align: right;text-shadow: none;}
+.layerpopup_con .footer a { float:right; color:#fff; display:block; margin-left: 20px; margin-top:1px; font-size: 1.5rem;}
+.layerpopup_con .footer input {vertical-align: middle; margin:0; margin-right:8px; text-shadow: none;}
+.layerpopup_con .footer input[type="checkout"] {vertical-align: middle;}
+.layerpopup_con img {display:block; max-width:100%; width: 100%;}
+.layerpopup_con > a {display: block;}
+.layerpopup_con .check-set input[type="checkbox"]:checked + label {color:#fff;}
+.layerpopup_con.pop2_01{left:calc(50% - 165px);}
+.layerpopup_con.pop2_02{left:calc(50% + 165px);}
+.layerpopup_con.pop3_01{left:calc(50% - 330px);}
+.layerpopup_con.pop3_02{left:50%;}
+.layerpopup_con.pop3_03{left:calc(50% + 330px);}
+				
+@media all and (max-width:1600px){ 
+	.main-visual .txt {left: 5%; font-size: 4rem;}
+	.main-cs .cs-banner a {background-size: cover; background-position: 50% 50%;}
+	.status-wrap .area-map {width:calc(100% - 250px) }
+	.status-wrap .area-list {width: 250px;}
+	.status-wrap .area-list .control .direction button {margin:0 40px;}
+	.status-wrap .status-right {padding:35px 40px}
+	.main-visual {height: auto;}
+	.main-visual .slide-img {height: auto;}
+	.main-visual .slide-img a {width: 100%; height: auto; top:0; left: 0; transform: none; position: relative;}
+	.main-visual .slide-img a img {width:auto; height: auto; max-height: 645px }
+}
+
+@media all and (max-width:1400px){ 
+	.main-quick li {float: left; width: 12%;}
+	.main-quick li a {background-size: contain; width: 100%; padding-top: 115%; font-size: 1.8rem;}
+	.status-wrap .section {width: 60%}
+	.status-wrap .status-right {width: 40%; padding:35px 30px}	
+    .status-wrap .status-detail li p {font-size: 3rem;}
+    .status-wrap .status-detail li p strong {font-size: 3.7rem;}
+	.layerpopup_con {transform: none;}
+	.layerpopup_con.pop2_01{left:20px;}
+	.layerpopup_con.pop2_02{left:185px;}
+	.layerpopup_con.pop3_01{left:20px}
+	.layerpopup_con.pop3_02{left:350px;}
+	.layerpopup_con.pop3_03{left:680px;;}
+}
+@media all and (max-width:1240px){ 
+	.main-visual .txt {left: 2%; font-size: 3rem;}
+	.main-visual .side-nav li a {font-size: 1.8rem; padding:25px 40px; min-width:240px }
+	.main-search {margin:50px 0;}
+	.main-content h2 {font-size: 3rem; margin-bottom: 30px; line-height: 1.4;}
+	.main-cs .section {width: 49%; margin-right: 0;}
+	.main-cs .mypage {margin-right: 2%; margin-bottom:30px}
+	.main-cs .notice {float: none; width: 100%; clear: both;}
+	.main-cs .notice .more-btn {top:5px;}
+	.main-cs .notice h2 {font-size: 2.2rem; padding-bottom: 10px;}
+	
+	.status-wrap .section {float: none; width: 100%}
+	.status-wrap .area-map {display: none;}
+	.status-wrap .area-list {float: none; width: 100%; height: auto;}
+	.status-wrap .area-list .list {padding:0;}
+	.status-wrap .area-list .list li {width:12.2%; margin:0.5% 1%;}
+	.status-wrap .status-right h3 {font-size: 2.2rem; margin-bottom: 20px;}
+	.status-wrap .status-list {height: 300px; width: 65%; margin-left: 5%}
+	.status-wrap .status-detail {width: 30%}
+	.status-wrap .status-detail li {padding:15px;}
+	.status-wrap .status-detail li .category {font-size: 1.8rem;}
+	.status-wrap .status-detail li p {font-size: 2.2rem; margin-top: 10px;}
+	.status-wrap .status-detail li p strong {font-size: 2.5rem;}
+    .status-wrap .status-list .no-list {margin-top: 47px}
+	.status-wrap .mobile-select  {display: block;}
+}
+
+@media all and (max-width:1000px){ 
+	.layerpopup_con {top:230px;left:50%;transform: translate(-50%, -50%);}
+	.layerpopup_con.pop2_01{left:50%;top:230px;}
+	.layerpopup_con.pop2_02{left:50%;top:290px;}
+	.layerpopup_con.pop3_01{left:50%;top:230px;}
+	.layerpopup_con.pop3_02{left:50%;top:290px;}
+	.layerpopup_con.pop3_03{left:50%;top:350px;}
+}
+
+@media all and (max-width:900px){ 
+	.main-visual .txt {top:35%; font-size: 2.5rem;}
+	.main-quick {margin:40px 0 20px 0;}
+	.main-cs .cs-banner a {height: 130px;}
+	.main-cs .cs-banner p {font-size: 2rem; top:50%; left: 20px;}
+	.main-cs .cs-banner p:after {width: 45px; margin-top: 10px;}
+	.main-cs p:after {margin-top: 20px;}
+}	
+
+@media all and (max-width:768px){ 
+	.layerpopup_con .title {font-size: 2rem;}
+	.main-visual .txt {top:25%}
+    .main-visual .side-nav { top:inherit; bottom: 100px; transform: none; width: 100%; overflow: hidden; padding:0 10px}
+	.main-visual .side-nav li {float: left; width: 50%; margin-bottom: 10px;  min-width: 100%; line-height: 1.4; }
+	.main-visual .slide-img a img {width: 100%; max-height: inherit;}
+	
+	.main-content h2 {font-size: 2.5rem; margin-bottom: 20px; }
+	.main-search {margin:30px 0 35px 0;}
+	.main-quick li {width: 29%; margin-bottom:20px;}
+	.main-quick li a {font-size: 1.6rem; padding-left: 5px; padding-right: 5px; background-size: 80%; padding-top: 90%}
+	.status-wrap .status-right {padding:25px 20px}
+	.status-wrap .area-list .list li {width: 14.6%}
+	.status-wrap .status-detail li p strong {font-size: 2.2rem;}
+	.status-wrap .status-detail li p {font-size: 1.8rem;}
+}
+@media all and (max-width:600px){ 
+	.status-wrap .status-right {padding:20px 10px}
+	.status-wrap .status-list,
+	.status-wrap .status-detail {float: none; width: 100%;}
+	.status-wrap .status-list {margin:0; margin-top: 20px;}
+	.status-wrap .status-detail {overflow: hidden; border-bottom: 0;}
+	.status-wrap .status-detail li {float: left; width: 33.3%; margin-right: -1px; margin-bottom:0; padding:9px; border-bottom: 1px solid #ccc;}
+	.status-wrap .status-detail li .category {font-size: 1.8rem; padding:7px 15px;}
+	.status-wrap .status-list ul li .category {font-size: 1.5rem;}
+	.status-wrap .status-list ul li strong {font-size: 1.6rem;}
+	.status-wrap .area-list .list li a {padding:9px 10px; font-size: 1.6rem;}
+	.status-wrap .area-list .list li {width: 23%}
+}
+
+@media all and (max-width:480px){ 
+	.main-visual .txt {top:20%; left: 15px;}
+	.main-visual .side-nav {bottom: 60px;}
+	.main-visual .side-nav li {float: none; width: 100%;}
+	.main-visual .side-nav li a {padding:15px 20px 15px 30px;}
+	.main-cs .section {float: none; width: 100%; margin:0;}
+	.main-cs .cs-banner a {height: 90px;}
+	.main-cs .faq a {margin:10px 0 30px 0;}
+	.main-cs p:after {margin-top: 10px;}
+}
+@media all and (max-width:360px){ 
+	.main-visual .side-nav li {margin-bottom: 7px;}
+	.main-visual .side-nav li a {padding:10px 20px 10px 30px;}
+}
+
+.climp:before{
+	content: '';
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    background-color: #666;
+    border-radius: 100px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
