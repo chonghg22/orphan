@@ -26,7 +26,6 @@ public class MainService {
 	public void insertBookInfoHdExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		MultipartFile mFile = null;
 		Map<String, MultipartFile> fileMap = request.getFileMap();
-		System.out.println("fileMap::"+fileMap);
 		Iterator keyData = fileMap.keySet().iterator();
 
 
@@ -37,8 +36,6 @@ public class MainService {
 			XSSFWorkbook wb = new XSSFWorkbook(mFile.getInputStream());
 
 			int check = 0;
-			// 첫번째 sheet 저작물 정보
-
 			try {
 				for (int i = 0; i < 1; i++) {
 					for (Row row : wb.getSheetAt(i)) {
@@ -53,6 +50,8 @@ public class MainService {
 							param.put("sido",row.getCell(2).toString());
 							//시군구명
 							param.put("sigungu",row.getCell(3).toString());
+							//사업자 등록명
+							param.put("corpType",row.getCell(4).toString());
 							//세차유형
 							param.put("washType",row.getCell(5).toString());
 							//주소
