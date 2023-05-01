@@ -27,7 +27,7 @@
                 <div class="col-md-4">
                     <div class="card shadow">
                         <div class="card-body text-start">
-                            <h5 class="card-title"><i class="bi bi-wash-total mr-3"></i>총 세차장(600)<a href="#" class="btn btn-primary" style="float: right;">보러가기</a>
+                            <h5 class="card-title"><i class="bi bi-wash-total mr-3"></i>총 세차장(${InfoWashCount})<a href="#" class="btn btn-primary" style="float: right;">보러가기</a>
                             </h5>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="card shadow">
                         <div class="card-body text-start">
                             <h5 class="card-title">
-                                <i class="bi bi-self-wash mr-3"></i>셀프세차(70)<a href="#" class="btn btn-primary" style="float: right;">보러가기</a>
+                                <i class="bi bi-self-wash mr-3"></i>셀프세차(${InfoWashSelfCount})<a href="#" class="btn btn-primary" style="float: right;">보러가기</a>
                             </h5>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                     <div class="card shadow">
                         <div class="card-body text-start">
                             <h5 class="card-title">
-                                <i class="bi bi-no-self mr-3"></i>손세차(100)<a href="#" class="btn btn-primary" style="float: right;">보러가기</a>
+                                <i class="bi bi-no-self mr-3"></i>손세차(${InfoWashNoSelfCount})<a href="#" class="btn btn-primary" style="float: right;">보러가기</a>
                             </h5>
                         </div>
                     </div>
@@ -75,35 +75,25 @@
             <div class="row">
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <c:forEach items="${selectGroupBySido}" var="list" varStatus="status">
+                        <option value="${list.sido}">${list.sido}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected>시 또는 도를 선택 해 주세요.</option>
                     </select>
                 </div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected>세차 유형을 선택 해 주세요.</option>
+                        <option value="1">셀프세차</option>
+                        <option value="2">손세차</option>
                     </select>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" >
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">보기</button>
                 </div>
             </div>
 

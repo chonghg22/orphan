@@ -43,8 +43,13 @@ public class MainController {
 	@RequestMapping(value="/")
     public String mainList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		Map<String, Object> param = CommandMap.washMap(request);
-		List<Map<String,Object>> selectLocalInfoWashCount = mainService.selectLocalInfoWashCount(param);
-		model.addAttribute("selectLocalInfoWashCount", selectLocalInfoWashCount);
+		List<Map<String,Object>> selectGroupBySido = mainService.selectGroupBySido(param);
+		model.addAttribute("selectGroupBySido", selectGroupBySido);
+		model.addAttribute("InfoWashCount", mainService.selectInfoWashTypeCount(param));
+		param.put("washType","셀프세차");
+		model.addAttribute("InfoWashSelfCount", mainService.selectInfoWashTypeCount(param));
+		param.put("washType","손세차");
+		model.addAttribute("InfoWashNoSelfCount", mainService.selectInfoWashTypeCount(param));
 		model.addAttribute("infoList", CommonUtil.youtubeClient(9,"셀프세차"));
 
     	return "main/main";

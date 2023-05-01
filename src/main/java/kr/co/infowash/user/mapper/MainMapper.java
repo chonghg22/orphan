@@ -9,5 +9,10 @@ import java.util.Map;
 public interface MainMapper {
     public void insertWashInfo(Map<String, Object> param) throws Exception;
 
-    public List<Map<String,Object>> selectLocalInfoWashCount(Map<String,Object> param) throws Exception;
+    public List<Map<String,Object>> selectGroupBySido(Map<String,Object> param) throws Exception;
+
+    public List<Map<String,Object>> selectGroupBySiGunGu(Map<String,Object> param) throws Exception;
+
+    public int selectInfoWashTypeCount(Map<String,Object> param) throws Exception;
+
 }

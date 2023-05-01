@@ -29,10 +29,24 @@
 		   )
 	</insert>
 
-	<select id="selectLocalInfoWashCount" parameterType="hashMap" resultType="hashMap">
-		/*selectLocalInfoWashCount*/
-		SELECT sido,COUNT(*) cnt FROM iw_wash_info GROUP BY sido
+	<select id="selectGroupBySido" parameterType="hashMap" resultType="hashMap">
+		/*selectGroupBySido*/
+		SELECT sido FROM iw_wash_info GROUP BY sido
 	</select>
 
+	<select id="selectGroupBySiGunGu" parameterType="hashMap" resultType="hashMap">
+		/*selectGroupBySiGunGu*/
+		SELECT sigungu FROM iw_wash_info where sido = #{sido} GROUP BY sigungu
+	</select>
+
+	<select id="selectInfoWashTypeCount" parameterType="hashMap" resultType="int">
+		/*selectInfoWashTypeCount*/
+		SELECT COUNT(*) cnt FROM iw_wash_info
+		<where>
+			<if test="washType != null and washType != ''">
+				wash_type = #{washType}
+			</if>
+		</where>
+	</select>
 
 </mapper>

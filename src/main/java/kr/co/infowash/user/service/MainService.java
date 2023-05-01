@@ -77,8 +77,16 @@ public class MainService {
 		}
 	}
 
-	public List<Map<String,Object>> selectLocalInfoWashCount(Map<String,Object> param) throws Exception {
-		return mainMapper.selectLocalInfoWashCount(param);
+	public List<Map<String,Object>> selectGroupBySido(Map<String,Object> param) throws Exception {
+		return mainMapper.selectGroupBySido(param);
+	}
+
+	public List<Map<String,Object>> selectGroupBySiGunGu(Map<String,Object> param) throws Exception {
+		return mainMapper.selectGroupBySiGunGu(param);
+	}
+
+	public int selectInfoWashTypeCount(Map<String,Object> param) throws Exception {
+		return mainMapper.selectInfoWashTypeCount(param);
 
 	}
 }
