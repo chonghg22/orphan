@@ -43,13 +43,31 @@ public class MainController {
 	@RequestMapping(value="/")
     public String mainList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
 		Map<String, Object> param = CommandMap.washMap(request);
+
+		//세차장 리스트
+		param.put("limit",10);
+		param.put("offset",Integer.parseInt(String.valueOf(param.getOrDefault("offset","0"))));
+		param.put("sido",param.getOrDefault("sido","서울특별시"));
+		param.put("sigungu",param.getOrDefault("sigungu","마포구"));
+		List<Map<String,Object>> selectInfoWashList = mainService.selectInfoWashList(param);
+		model.addAttribute("selectInfoWashList", selectInfoWashList);
+
+		//시도 리스트
 		List<Map<String,Object>> selectGroupBySido = mainService.selectGroupBySido(param);
 		model.addAttribute("selectGroupBySido", selectGroupBySido);
+
+		//총 세차장 count
 		model.addAttribute("InfoWashCount", mainService.selectInfoWashTypeCount(param));
+
+		//셀프세차장 count
 		param.put("washType","셀프세차");
 		model.addAttribute("InfoWashSelfCount", mainService.selectInfoWashTypeCount(param));
+
+		//손세차장 count
 		param.put("washType","손세차");
 		model.addAttribute("InfoWashNoSelfCount", mainService.selectInfoWashTypeCount(param));
+
+		//유튜브 api (수량:9,키워드:셀프세차)
 		model.addAttribute("infoList", CommonUtil.youtubeClient(9,"셀프세차"));
 
     	return "main/main";

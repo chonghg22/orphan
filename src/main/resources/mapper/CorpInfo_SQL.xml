@@ -49,4 +49,26 @@
 		</where>
 	</select>
 
+	<select id="selectInfoWashList" parameterType="hashMap" resultType="hashMap">
+		/*selectInfoWashList*/
+		SELECT
+		    iw_seq as iwSeq,
+		    corp_name as corpName,
+		    sido,
+		    sigungu,
+		    corp_type as corpType,
+		    wash_type as washType,
+		    address,
+		    tel_no as telNo,
+		    latitude,
+		    longitude
+		FROM iw_wash_info
+		where
+			sido = #{sido}
+			and sigungu = #{sigungu}
+		LIMIT #{offset},#{limit}
+	</select>
+
+
+
 </mapper>

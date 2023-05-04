@@ -23,6 +23,10 @@ public class MainService {
 	@Autowired
 	MainMapper mainMapper;
 
+	public List<Map<String,Object>> selectInfoWashList(Map<String,Object> param) throws Exception {
+		return mainMapper.selectInfoWashList(param);
+	}
+
 	public void insertBookInfoHdExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, SQLException{
 		MultipartFile mFile = null;
 		Map<String, MultipartFile> fileMap = request.getFileMap();

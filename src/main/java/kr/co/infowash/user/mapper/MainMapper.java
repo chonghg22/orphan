@@ -7,6 +7,9 @@ import java.util.Map;
 
 @Mapper
 public interface MainMapper {
+
+    public List<Map<String,Object>> selectInfoWashList(Map<String,Object> param) throws Exception;
+
     public void insertWashInfo(Map<String, Object> param) throws Exception;
 
     public List<Map<String,Object>> selectGroupBySido(Map<String,Object> param) throws Exception;

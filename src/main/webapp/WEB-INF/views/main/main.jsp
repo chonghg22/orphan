@@ -75,14 +75,15 @@
             <div class="row">
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" >
+                        <option value="">시 또는 도를 선택 해 주세요.</option>
                         <c:forEach items="${selectGroupBySido}" var="list" varStatus="status">
-                        <option value="${list.sido}">${list.sido}</option>
+                            <option value="${list.sido}">${list.sido}</option>
                         </c:forEach>
                     </select>
                 </div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" >
-                        <option selected>시 또는 도를 선택 해 주세요.</option>
+                        <option selected>구 또는 군을 선택 해 주세요.</option>
                     </select>
                 </div>
                 <div class="col">
@@ -101,30 +102,23 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">NO</th>
+                        <th scope="col">세차장명</th>
+                        <th scope="col">주소</th>
+                        <th scope="col">전화번호</th>
+                        <th scope="col">위치</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${selectInfoWashList}" var="list" varStatus="status">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <th scope="row">${status.index+1}</th>
+                        <td>${list.corpName}</td>
+                        <td>${list.address}</td>
+                        <td>${list.telNo}</td>
+                        <td><a href="#" class="btn btn-primary">보러가기</a></td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
