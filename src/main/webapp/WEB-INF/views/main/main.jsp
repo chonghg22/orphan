@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoWash</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script>
 </head>
@@ -72,9 +73,10 @@
                 </c:forEach>
             </div>
             <br>
+            <form action="/">
             <div class="row">
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" >
+                    <select class="form-select" name="sido" aria-label="Default select example" onchange="fn_chageGunGu(this)">
                         <option value="">시 또는 도를 선택 해 주세요.</option>
                         <c:forEach items="${selectGroupBySido}" var="list" varStatus="status">
                             <option value="${list.sido}">${list.sido}</option>
@@ -82,7 +84,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" >
+                    <select class="form-select" aria-label="Default select example" id="sigungu" name="sigungu">
                         <option selected>구 또는 군을 선택 해 주세요.</option>
                     </select>
                 </div>
@@ -94,10 +96,10 @@
                     </select>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">보기</button>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary">보기</button>
                 </div>
             </div>
-
+            </form>
             <div class="mt-5">
                 <table class="table">
                     <thead>
@@ -126,7 +128,29 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-
+<script>
+    function fn_chageGunGu(obj){
+        $.ajax({
+            url  : "/selectGungu",
+            data : {"sido":obj.value},
+            type : "POST",
+            dataType : "JSON",
+            success : function(res){
+                let tbody = null;
+                if (res != null) {
+                    res.forEach(function (element) {
+                        tbody += '<option value="' + element.sigungu + '">' + element.sigungu + '</option>';
+                    });
+                    $("#sigungu").html(tbody);
+                }
+            },
+            error : function(e){
+                console.log(e.responseText);
+                alert("There are some problems in System. <br />Please Try again.");
+            }
+        })
+    }
+</script>
 </body>
 
 </html>
