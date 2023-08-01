@@ -73,19 +73,20 @@
                 </c:forEach>
             </div>
             <br>
-            <form action="/">
+            <form action="/" name="searchForm" id="searchForm">
+                <input type="hidden" name="nowPage" id="nowPage" value="${returnMap.nowPage}"/>
             <div class="row">
                 <div class="col">
                     <select class="form-select" name="sido" aria-label="Default select example" onchange="fn_chageGunGu(this)">
                         <option value="">시 또는 도를 선택 해 주세요.</option>
                         <c:forEach items="${selectGroupBySido}" var="list" varStatus="status">
-                            <option value="${list.sido}">${list.sido}</option>
+                            <option value="${list.sido}" <c:if test="${list.sido eq resultMap.sido}">selected</c:if>>${list.sido}</option>
                         </c:forEach>
                     </select>
                 </div>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" id="sigungu" name="sigungu">
-                        <option selected>구 또는 군을 선택 해 주세요.</option>
+                        <option value="${resultMap.sigungu}" selected>${resultMap.sigungu}</option>
                     </select>
                 </div>
                 <div class="col">
@@ -96,7 +97,7 @@
                     </select>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-sm btn-outline-secondary">보기</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="fn_movePage()">보기</button>
                 </div>
             </div>
             </form>
@@ -124,11 +125,27 @@
                     </tbody>
                 </table>
             </div>
+            <jsp:include page="../layout/include_paging.jsp" />
         </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 <script>
+    function fn_movePage(){
+        let form = $("#searchForm");
+        $("#nowPage").val(${returnMap.nowPage});
+        $("#sido").val(${returnMap.sido});
+        $("#sigungu").val(${returnMap.sigungu});
+        form.attr('action', "/");
+        form.submit();
+    }
+    function goPage( nowPage ){
+        let form = $("#searchForm");
+        $("#nowPage").val(nowPage);
+        form.attr('action', "/");
+        form.submit();
+    }
+
     function fn_chageGunGu(obj){
         $.ajax({
             url  : "/selectGungu",

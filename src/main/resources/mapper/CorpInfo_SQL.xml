@@ -69,6 +69,16 @@
 		LIMIT #{offset},#{limit}
 	</select>
 
+	<select id="selectInfoWashCnt" parameterType="hashMap" resultType="int">
+		/*selectInfoWashCnt*/
+		SELECT
+			count(*) cnt
+		FROM iw_wash_info
+		where
+			sido = #{sido}
+		  and sigungu = #{sigungu}
+	</select>
+
 
 
 </mapper>

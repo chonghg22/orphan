@@ -16,6 +16,8 @@ public interface MainMapper {
 
     public List<Map<String,Object>> selectGroupBySiGunGu(Map<String,Object> param) throws Exception;
 
-    public int selectInfoWashTypeCount(Map<String,Object> param) throws Exception;
+    int selectInfoWashTypeCount(Map<String,Object> param) throws Exception;
+
+    int selectInfoWashCnt(Map<String,Object> param) throws Exception;
 
 }

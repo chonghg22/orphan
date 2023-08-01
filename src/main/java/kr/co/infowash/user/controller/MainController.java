@@ -42,14 +42,26 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 	@RequestMapping(value="/")
-    public String mainList(Map<String, Object> map, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
-		Map<String, Object> param = CommandMap.washMap(request);
+    public String mainList(@RequestParam Map<String, Object> param, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
 
 		//세차장 리스트
-		param.put("limit",10);
-		param.put("offset",Integer.parseInt(String.valueOf(param.getOrDefault("offset","0"))));
+
+		int limit = 10;
+		int nowPage = 1;
+		if(param.get("nowPage") != null && !"".equals(param.get("nowPage").toString())){
+			nowPage = Integer.parseInt(param.get("nowPage").toString());
+		}
+		int offset = (nowPage-1) * limit;
+		param.put("limit",limit);
+		param.put("nowPage",nowPage);
+		param.put("offset",offset);
 		param.put("sido",param.getOrDefault("sido","서울특별시"));
 		param.put("sigungu",param.getOrDefault("sigungu","마포구"));
+		param.put("totalCnt", mainService.selectInfoWashCnt(param));
+		if(param.get("nowPage") == null) {
+			param.put("nowPage", "1");
+		}
+
 		List<Map<String,Object>> selectInfoWashList = mainService.selectInfoWashList(param);
 		model.addAttribute("selectInfoWashList", selectInfoWashList);
 
@@ -70,6 +82,8 @@ public class MainController {
 
 		//유튜브 api (수량:9,키워드:셀프세차)
 		model.addAttribute("infoList", CommonUtil.youtubeClient(9,"셀프세차"));
+		model.addAttribute("selectGroupBySido", selectGroupBySido);
+		model.addAttribute("resultMap", param);
 
     	return "main/main";
     }

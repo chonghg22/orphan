@@ -91,6 +91,9 @@ public class MainService {
 
 	public int selectInfoWashTypeCount(Map<String,Object> param) throws Exception {
 		return mainMapper.selectInfoWashTypeCount(param);
+	}
 
+	public int selectInfoWashCnt(Map<String,Object> param) throws Exception {
+		return mainMapper.selectInfoWashCnt(param);
 	}
 }
