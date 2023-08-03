@@ -41,6 +41,9 @@ public class MainController {
 
 	@Autowired
 	MainService mainService;
+	/*
+	* param : map
+	* */
 	@RequestMapping(value="/")
     public String mainList(@RequestParam Map<String, Object> param, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
 
