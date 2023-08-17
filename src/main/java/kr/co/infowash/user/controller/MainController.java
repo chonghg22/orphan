@@ -88,7 +88,7 @@ public class MainController {
 		model.addAttribute("InfoWashNoSelfCount", mainService.selectInfoWashTypeCount(param));
 		param.put("washType",washType);
 		//유튜브 api (수량:9,키워드:셀프세차)
-		model.addAttribute("infoList", CommonUtil.youtubeClient(9,"셀프세차"));
+		model.addAttribute("infoList", CommonUtil.youtubeClient(12,"셀프세차"));
 		model.addAttribute("selectGroupBySido", selectGroupBySido);
 		model.addAttribute("resultMap", param);
 
