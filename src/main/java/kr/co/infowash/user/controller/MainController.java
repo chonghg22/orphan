@@ -64,6 +64,10 @@ public class MainController {
 		if(param.get("nowPage") == null) {
 			param.put("nowPage", "1");
 		}
+		String washType = "";
+		if(param.get("washType") !=null){
+			washType = param.get("washType").toString();
+		}
 
 		List<Map<String,Object>> selectInfoWashList = mainService.selectInfoWashList(param);
 		model.addAttribute("selectInfoWashList", selectInfoWashList);
@@ -82,7 +86,7 @@ public class MainController {
 		//손세차장 count
 		param.put("washType","손세차");
 		model.addAttribute("InfoWashNoSelfCount", mainService.selectInfoWashTypeCount(param));
-
+		param.put("washType",washType);
 		//유튜브 api (수량:9,키워드:셀프세차)
 		model.addAttribute("infoList", CommonUtil.youtubeClient(9,"셀프세차"));
 		model.addAttribute("selectGroupBySido", selectGroupBySido);

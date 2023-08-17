@@ -66,6 +66,9 @@
 		where
 			sido = #{sido}
 			and sigungu = #{sigungu}
+		<if test="washType != null and washType != ''">
+			and wash_type = #{washType}
+		</if>
 		LIMIT #{offset},#{limit}
 	</select>
 
@@ -77,6 +80,9 @@
 		where
 			sido = #{sido}
 		  and sigungu = #{sigungu}
+		<if test="washType != null and washType != ''">
+			and wash_type = #{washType}
+		</if>
 	</select>
 
 

@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
     <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e0942185311b94482c641ed5245ff7"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e0942185311b94482c641ed5245ff7&libraries=services"></script>
 </head>
 <script>
 </script>
@@ -73,6 +73,9 @@
                 </c:forEach>
             </div>
             <br>
+            <div id="map" style="height:400px;"></div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+            <br>
             <form action="/" name="searchForm" id="searchForm">
                 <input type="hidden" name="nowPage" id="nowPage" value="${returnMap.nowPage}"/>
             <div class="row">
@@ -90,10 +93,10 @@
                     </select>
                 </div>
                 <div class="col">
-                    <select class="form-select" aria-label="Default select example" >
-                        <option selected>세차 유형을 선택 해 주세요.</option>
-                        <option value="1">셀프세차</option>
-                        <option value="2">손세차</option>
+                    <select class="form-select" aria-label="Default select example" name="washType" id="washType">
+                        <option value="" selected>세차 유형을 선택 해 주세요.</option>
+                        <option value="셀프세차" <c:if test="${resultMap.washType eq '셀프세차'}">selected</c:if>>셀프세차</option>
+                        <option value="손세차" <c:if test="${resultMap.washType eq '손세차'}">selected</c:if>>손세차</option>
                     </select>
                 </div>
                 <div class="col">
@@ -119,7 +122,7 @@
                         <td>${list.corpName}</td>
                         <td>${list.address}</td>
                         <td>${list.telNo}</td>
-                        <td><a href="#" class="btn btn-primary">보러가기</a></td>
+                        <td><a href="#" class="btn btn-primary" onclick="searchWash('${list.address}','${list.corpName}')">보러가기</a></td>
                     </tr>
                     </c:forEach>
                     </tbody>
@@ -129,17 +132,67 @@
         </div>
     </div>
 </div>
-<div id="map" style="width:500px;height:400px;"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 <script>
+    // $(document).ready(function () {
+    <%--    fn_chageGunGu('${resultMap.sido}');--%>
+    // })
+    window.onload = function(){
+        fn_chageGunGu('${resultMap.sido}');
+    }
     //카카오맵 api
-    var container = document.getElementById('map');
-    var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
-    };
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
 
-    var map = new kakao.maps.Map(container, options);
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+    var mapTypeControl = new kakao.maps.MapTypeControl();
+
+    // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+    // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    var zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    //주소로 좌표 찍기
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    searchWash('서울특별시 마포구 성미산로 20','광일세차장');
+
+        //카카오맵 종료
+    function searchWash(addr,washName){
+        geocoder.addressSearch(addr, function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+washName+'</div>'
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        })
+        $('html, body').animate({
+            scrollTop: $("#map").offset().top
+        }, 50);
+    }
 
     function fn_movePage(){
         let form = $("#searchForm");
@@ -149,6 +202,7 @@
         form.attr('action', "/");
         form.submit();
     }
+
     function goPage( nowPage ){
         let form = $("#searchForm");
         $("#nowPage").val(nowPage);
@@ -157,18 +211,31 @@
     }
 
     function fn_chageGunGu(obj){
+        let sido;
+        let status;
+        if(obj.value == null){
+            sido = obj;
+        }else{
+            sido = obj.value;
+        }
         $.ajax({
             url  : "/selectGungu",
-            data : {"sido":obj.value},
+            data : {"sido":sido},
             type : "POST",
             dataType : "JSON",
             success : function(res){
                 let tbody = null;
                 if (res != null) {
-                    res.forEach(function (element) {
-                        tbody += '<option value="' + element.sigungu + '">' + element.sigungu + '</option>';
+                    res.forEach(function (element,index) {
+                        tbody += '<option value="' + element.sigungu +'" id="location' + index +'">' + element.sigungu + '</option>';
+                        if(element.sigungu == '${resultMap.sigungu}'){
+                            status = index;
+                        }
                     });
+                    console.log(status)
+                    // document.getElementById("test").setAttribute("selected", "selected");
                     $("#sigungu").html(tbody);
+                    $("#location"+status).attr("selected","selected");
                 }
             },
             error : function(e){
