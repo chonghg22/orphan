@@ -78,6 +78,6 @@
     <!--        <appender-ref ref="error" />-->
     <!--    </root>-->
 
-    <logger name="kr.co.infowash" level="DEBUG" />
+    <logger name="kr.co.orphan" level="DEBUG" />
     <logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG" />
 </configuration>

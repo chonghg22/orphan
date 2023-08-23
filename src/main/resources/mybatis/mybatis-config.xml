@@ -7,6 +7,6 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
-<!--		<typeAlias type="kr.co.infowash.common.CommandMap" alias="commandMap"/>-->
+<!--		<typeAlias type="kr.co.orphan.common.CommandMap" alias="commandMap"/>-->
 	</typeAliases>
 </configuration>
