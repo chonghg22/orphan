@@ -28,8 +28,24 @@ public class BookInfoService {
 		return bookInfoMapper.selectBookInfoList(param);
 	}
 
+	public Map<String,Object> selectBookInfoView(Map<String,Object> param) throws Exception {
+		return bookInfoMapper.selectBookInfoView(param);
+	}
+
 	public int selectBookInfoListTotCnt(Map<String,Object> param) throws Exception {
 		return bookInfoMapper.selectBookInfoListTotCnt(param);
+	}
+
+	public int deleteBookInfo(Map<String,Object> param) throws Exception {
+		return bookInfoMapper.deleteBookInfo(param);
+	}
+
+	public int insertBookInfo(Map<String,Object> param) throws Exception {
+		return bookInfoMapper.insertBookInfo(param);
+	}
+
+	public int updateBookInfo(Map<String,Object> param) throws Exception {
+		return bookInfoMapper.updateBookInfo(param);
 	}
 
 }

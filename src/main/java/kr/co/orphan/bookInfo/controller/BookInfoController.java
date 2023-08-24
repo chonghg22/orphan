@@ -32,9 +32,12 @@ public class BookInfoController {
 	
 	//도서정보 목록
 	@RequestMapping(value="/bookInfoList")
-    public String noticeList(@RequestParam Map<String, Object> param, ModelMap model, HttpServletResponse response, HttpServletRequest request) throws Exception{
+    public String bookInfoList(@RequestParam Map<String, Object> param, ModelMap model) throws Exception{
 
 		int limit = 10;
+		if(param.get("limit") !=null){
+			limit = Integer.parseInt(param.get("limit").toString());
+		}
 		int nowPage = 1;
 		if(param.get("nowPage") != null && !"".equals(param.get("nowPage").toString())){
 			nowPage = Integer.parseInt(param.get("nowPage").toString());
@@ -43,15 +46,71 @@ public class BookInfoController {
 		param.put("limit",limit);
 		param.put("nowPage",nowPage);
 		param.put("offset",offset);
-		param.put("totalCnt", bookInfoService.selectBookInfoListTotCnt(param));
+
 		if(param.get("nowPage") == null) {
 			param.put("nowPage", "1");
 		}
-
+		param.put("totalCnt", bookInfoService.selectBookInfoListTotCnt(param));
 		List<Map<String,Object>> bookInfoList = bookInfoService.selectBookInfoList(param);
 		model.addAttribute("bookInfoList", bookInfoList);
 		model.addAttribute("resultMap", param);
 
     	return "mngr/bookInfo/bookInfo_list";
     }
+
+	//도서정보 상세
+	@RequestMapping(value="/bookInfoView")
+	public String bookInfoView(@RequestParam Map<String, Object> param, ModelMap model) throws Exception{
+
+		Map<String,Object> bookInfoView = bookInfoService.selectBookInfoView(param);
+		model.addAttribute("bookInfoView", bookInfoView);
+		model.addAttribute("resultMap", param);
+
+		return "mngr/bookInfo/bookInfo_view";
+	}
+
+
+	@RequestMapping(value="/insertBookInfo")
+	public String insertBookInfo(@RequestParam Map<String, Object> param, ModelMap model) throws Exception{
+
+		return "mngr/bookInfo/bookInfo_input";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/insertBookInfoProc")
+	public int insertBookInfoProc(@RequestParam Map<String,Object> paramMap)
+			throws Exception {
+		int result = 0;
+		result = bookInfoService.insertBookInfo(paramMap);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/checkDeleteBookInfo")
+	public int checkDeleteBookInfo(@RequestParam Map<String,Object> paramMap, @RequestParam(value="chkSeq") String[] arr, ModelMap model, HttpServletResponse response)
+			throws Exception {
+		int result = 0;
+		for(int i=0; i<arr.length; i++) {
+			paramMap.put("seq", arr[i]);
+			result = bookInfoService.deleteBookInfo(paramMap);
+		}
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/updateBookInfo")
+	public int updateBookInfo(@RequestParam Map<String,Object> paramMap)
+			throws Exception {
+		int result = bookInfoService.updateBookInfo(paramMap);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/deleteBookInfo")
+	public int deleteBookInfo(@RequestParam Map<String,Object> paramMap)
+			throws Exception {
+		int result = bookInfoService.deleteBookInfo(paramMap);
+		return result;
+	}
+
 }

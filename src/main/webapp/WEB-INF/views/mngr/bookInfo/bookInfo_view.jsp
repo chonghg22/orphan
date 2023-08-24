@@ -1,28 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="ufn"    uri="/WEB-INF/tlds/egovfn.tld"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<title>저작물 목록 관리</title>
-</head>
 <body>
+<jsp:include page="/WEB-INF/views/layout/admin_all.jsp"/>
         		<h3 class="result-title">저작물 목록 관리</h3>
       			<div class="sub-content">
 					<div class="tab_wrap">
 				        <form name="listForm" id="listForm" method="get">
-						<input type="hidden" name="schFld" value="<c:out value="${paramMap.schFld }" />" />
-						<input type="hidden" name="page" value="<c:out value="${paramMap.page }" />" />
-						<input type="hidden" name="ordFld" value="<c:out value="${paramMap.ordFld }" />" />
-						<input type="hidden" name="ordBy" value="<c:out value="${paramMap.ordBy }" />" />
-						<input type="hidden" name="bookSeq" value="<c:out value="${paramMap.bookSeq }" />" />
-						<input type="hidden" name="viewCount" value="<c:out value="${paramMap.viewCount}" />" />
-						<input type="hidden" name="schCode" id="schCode" value="${paramMap.schCode}"/>
-						<input type="hidden" name="schStr" id="schStr" value="${paramMap.schStr}"/>
-						<input type="hidden" name="schBiz" id="schBiz" value="${paramMap.schBiz}"/>
-						<input type="hidden" name="bizCode" id="bizCode" value="${paramMap.bizCode}"/>
+						<input type="hidden" name="nowPage" id="nowPage" value="${resultMap.nowPage}"/>
+						<input type="hidden" name="bookSeq"  value="${resultMap.bookSeq}"/>
+						<input type="hidden" name="schFld" id="schFld" value="${resultMap.schFld}"/>
+						<input type="hidden" name="schStr" id="schStr" value="${resultMap.schStr}"/>
+						<input type="hidden" name="limit" id="limit" value="${resultMap.limit}"/>
 						</form>
+						<form name="form1" id="form1" method="post">
+						<input type="hidden" name="bookSeq" id="bookSeq" value="${bookInfoView.bookSeq}"/>
 						<div id="tab-1" class="tab-content current">
 							<div class="table-wrap">
 								<div class="table_cont">
@@ -32,89 +24,43 @@
 										</colgroup>
 										<tbody>
 										<tr>
-											<th><span>저작물명</span></th>
-											<td><c:out value="${resultList.bookName}"/></td>
+											<th><span>연번</span></th>
+											<td><c:out value="${bookInfoView.bookSeq}" /></td>
+										</tr>
+										<tr>
+											<th><span>도서명</span></th>
+											<td>
+												<input type="text" name="bookTitle" id="bookTitle" value="${bookInfoView.bookTitle}"/>
+											</td>
 										</tr>
 				 						<tr>
-											<th><span>저작자명</span></th>
-											<td><c:out value="${resultList.bookAuthor}"/></td>
-										</tr>
-										<tr>
-											<th>출판사명</th>
-											<td><c:out value="${resultList.bookPublisher}"/></td>
-										</tr>
-										<tr>
-											<th>발행년도</th>
-											<td><c:out value="${resultList.bookPubYear}"/></td>
-										</tr>
-										<tr>
-											<th><span>제어번호</span></th>
-											<td><c:out value="${resultList.controlNo}" /></td>
-										</tr>
-										<tr>
-											<th><span>등록일</span></th>
-											<td><c:out value="${fn:substring(resultList.regdt,0,10)}" /></td>
-										</tr>
-										<tr>
-											<th><span>연번</span></th>
-											<td><c:out value="${resultList.bookSeq}" /></td>
-										</tr>
-										<tr>
-											<th><span>저작물상태</span></th>
+											<th><span>저자명</span></th>
 											<td>
-											<c:choose>
-												<c:when test="${resultList.status eq '10'}">배분완료</c:when>
-												<c:when test="${resultList.status eq '11'}">재조사 요청</c:when>
-												<c:when test="${resultList.status eq '20'}">검증 요청</c:when>
-												<c:when test="${resultList.status eq '30'}">승인 요청</c:when>
-												<c:when test="${resultList.status eq '40'}">반려</c:when>
-												<c:when test="${resultList.status eq '99'}">최종승인</c:when>
-												<c:otherwise>배분대기</c:otherwise>
-											</c:choose>
+												<input type="text" name="bookAuthor" id="bookAuthor" value="${bookInfoView.bookAuthor}"/>
 											</td>
 										</tr>
 										<tr>
-											<th>배분일</th>
-											<td><c:out value="${ufn:printDatePattern(resultList.distributedt, 'yyyy-mm-dd')}"/></td>
-										</tr>
-										<c:if test="${not empty resultList.searcherNo}">
-										<tr>
-											<th><span>조사자ID</span></th>
-											<td><c:out value="${resultList.searcherId}" /></td>
-										</tr>
-										</c:if>
-										<tr>
-											<th>검증요청일</th>
-											<td><c:out value="${ufn:printDatePattern(resultList.verityReqDt, 'yyyy-mm-dd')}"/></td>
+											<th>출판사</th>
+											<td>
+												<input type="text" name="bookPublisher" id="bookPublisher" value="${bookInfoView.bookPublisher}"/>
+											</td>
 										</tr>
 										<tr>
-											<th>검증자ID</th>
-											<td><c:out value="${resultList.verifierId}"/></td>
+											<th>발행년도</th>
+											<td>
+												<input type="text" name="publicationYear" id="publicationYear" value="${bookInfoView.publicationYear}"/>
+											</td>
 										</tr>
 										<tr>
-											<th>승인요청일</th>
-											<td><c:out value="${ufn:printDatePattern(resultList.confirmReqDt, 'yyyy-mm-dd')}"/></td>
-										</tr>
-										<c:if test="${resultList.status eq '40' }">
-										<tr>
-											<th>반려자ID</th>
-											<td><c:out value="${resultList.approvalId}"/></td>
+											<th><span>제어번호</span></th>
+											<td>
+												<input type="text" name="controlNo" id="controlNo" value="${bookInfoView.controlNo}"/>
+											</td>
 										</tr>
 										<tr>
-											<th>반려일</th>
-											<td><c:out value="${ufn:printDatePattern(resultList.confirmdt, 'yyyy-mm-dd')}"/></td>
+											<th><span>등록일</span></th>
+											<td><c:out value="${fn:substring(bookInfoView.createdDate,0,10)}" /></td>
 										</tr>
-										</c:if>
-										<c:if test="${resultList.status eq '99' }">
-										<tr>
-											<th>승인자ID</th>
-											<td><c:out value="${resultList.approvalId}"/></td>
-										</tr>
-										<tr>
-											<th>승인일</th>
-											<td><c:out value="${ufn:printDatePattern(resultList.confirmdt, 'yyyy-mm-dd')}"/></td>
-										</tr>
-										</c:if>
 										</tbody>
 									</table>
 								</div><!-- /.col -->
@@ -122,32 +68,61 @@
 							<div id="tab-3" class="tab-content"></div>
 							<div class="btn_wrap right">
 								<a href="#none" onclick="fn_goList();" class="btn gray_btn left">목록</a>
-								<a href="#none" onclick="fn_goDel();" class="btn black_btn">삭제</a>
+								<a href="#none" onclick="fn_goDel('${bookInfoView.bookSeq}');" class="btn black_btn">삭제</a>
 								<a href="#none" onclick="fn_goEdit();" class="btn">수정</a>
 							</div><!-- btn_wrap -->
 		                </div><!-- tab-content -->
+						</form>
 					</div><!-- tab_wrap -->
 				</div><!-- sub-content -->
-
+<jsp:include page="/WEB-INF/views/layout/admin_close.jsp"/>
 <script type="text/javascript">
 function fn_goList() {
 	var f = document.listForm;
-	f.action = "bookInfo_list.do";
+	f.action = "/mngr/bookInfo/bookInfoList";
 	f.submit();
 }
 
 function fn_goEdit() {
-	var f = document.listForm;
-	f.action = "bookInfo_edit.do";
-	f.submit();
+	let formData = $("#form1").serialize();
+	if(confirm("수정하시겠습니까?")){
+		$.ajax({
+			url  : "/mngr/bookInfo/updateBookInfo",
+			data : formData,
+			type : "POST",
+			dataType : "JSON",
+			success : function(res){
+				if(res>0){
+					alert("수정되었습니다.");
+					location.href='/mngr/bookInfo/bookInfoList';
+				}
+			},
+			error : function(e){
+				console.log(e.responseText);
+				alert("There are some problems in System. <br />Please Try again.");
+			}
+		})
+	}
 }
 
-function fn_goDel(){
+function fn_goDel(seq){
 	if(confirm("삭제하시겠습니까?")){
-		var frm = document.listForm;
-		frm.encoding = "application/x-www-form-urlencoded";
-		frm.action = "bookInfo_delete_proc.do";
-		frm.submit();
+		$.ajax({
+			url  : "/mngr/bookInfo/deleteBookInfo",
+			data : {"seq" : seq},
+			type : "POST",
+			dataType : "JSON",
+			success : function(res){
+				if(res>0){
+					alert("삭제되었습니다.");
+					location.href='/mngr/bookInfo/bookInfoList';
+				}
+			},
+			error : function(e){
+				console.log(e.responseText);
+				alert("There are some problems in System. <br />Please Try again.");
+			}
+		})
 	}
 }
 

@@ -1,24 +1,19 @@
 package kr.co.orphan.common;
 
 
+import com.google.common.base.CaseFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandMap {
+public class CommandMap extends HashMap {
 
-	public static Map<String, Object> washMap(HttpServletRequest request) {
-		Map<String, Object> param = new HashMap<>();
+	private static final long serialVersionUID = 1l;
 
-		Enumeration<String> en = request.getParameterNames();
-		while ( en.hasMoreElements() ){
-			String key    = en.nextElement();
-			String value  = request.getParameter(key);
-			param.put(key , value);
-		}
-
-		return param;
+	public Object put(Object key, Object value){
+		return super.put(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL,(String) key),value);
 	}
 
 }
