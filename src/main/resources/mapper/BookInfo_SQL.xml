@@ -54,18 +54,20 @@
 			a.modified_date,
 			a.modified_nm
 		from
-			book_info a
+			orphan_book_info a
 		where a.open_yn = 'Y'
 		<include refid="listWhere" />
 		order by a.book_seq desc
+		<if test="excelDown != 'excel'">
 		LIMIT #{offset},#{limit}
+		</if>
 	</select>
 
 	<!-- 도서 목록 카운트 -->
 	<select id="selectBookInfoListTotCnt" parameterType="java.util.HashMap" resultType="int">
 		/*selectBookInfoListTotCnt*/
 		select count(*) totcnt
-		from book_info a
+		from orphan_book_info a
 		where a.open_yn = 'Y'
 		<include refid="listWhere" />
 	</select>
@@ -87,12 +89,12 @@
 			a.modified_date,
 			a.modified_nm
 		from
-		book_info a
+			orphan_book_info a
 		where a.book_seq = #{bookSeq}
 	</select>
 
 	<insert id="insertBookInfo">
-		INSERT INTO book_info
+		INSERT INTO orphan_book_info
 		    (book_title,
 		     book_author,
 		     book_publisher,
@@ -111,7 +113,7 @@
 		       )
 	</insert>
 	<update id="updateBookInfo">
-		UPDATE book_info
+		UPDATE orphan_book_info
 		SET book_title=#{bookTitle},
 		    book_author=#{bookAuthor},
 		    book_publisher=#{bookPublisher},
@@ -124,6 +126,6 @@
 	</update>
 	<!--도서 목록 선택 삭제-->
 	<delete id="deleteBookInfo">
-		delete from book_info where book_seq = #{seq}
+		delete from orphan_book_info where book_seq = #{seq}
 	</delete>
 </mapper>
