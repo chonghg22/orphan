@@ -8,7 +8,7 @@
 <jsp:include page="/WEB-INF/views/layout/admin_all.jsp"/>
         		<h3 class="result-title">도서 목록 관리</h3>
       			<div class="sub-content">
-	                <form name="listForm" id="listForm" method="get">
+	                <form name="listForm" id="listForm" method="">
 					<input type="hidden" name="nowPage" id="nowPage" value="${resultMap.nowPage}"/>
 					<input type="hidden" name="bookSeq" id="bookSeq" value=""/>
 					<div class="search_list">
@@ -35,7 +35,7 @@
 							<p class="title">전체 <span>${resultMap.totalCnt}</span> 건</p>
 							<div class="table-wrap">
 								<div class="table_top_btn">
-<%--									<a href="#none" class="btn excel_btn">엑셀다운로드</a>--%>
+									<a href="#none" class="btn excel_btn" onclick="fn_excelDown()">엑셀다운로드</a>
 									<select id="limit" name="limit" onchange="goPage('${resultMap.nowPage}')">
 										<option value="10" <c:if test="${resultMap.limit eq '10'}">selected</c:if>>10개씩 보기</option>
 										<option value="30" <c:if test="${resultMap.limit eq '30'}">selected</c:if>>30개씩 보기</option>
@@ -114,6 +114,33 @@ function fn_checkAll(obj) {
 	$("input[name=chkSeq]").each(function() {
 		$(this).prop("checked", obj.checked);
 	});
+}
+
+function fn_excelDown(){
+	let form = $("#listForm");
+	form.attr('action', "/mngr/bookInfo/excelDown");
+	form.attr('method', "POST");
+	form.submit();
+	// var formData = $("#listForm").serialize();
+	// $.ajax({
+	// 	url  : "/mngr/bookInfo/excelDown",
+	// 	data : formData,
+	// 	type : "POST",
+	// 	dataType : "JSON",
+	// 	xhrFields: {
+	// 		responseType: "blob",
+	// 	},
+	// 	success : function(res){
+	// 		if(res == 'good'){
+	// 			alert("다운되었습니다.");
+	// 			location.reload();
+	// 		}
+	// 	},
+	// 	error : function(e){
+	// 		console.log(e);
+	// 		alert("There are some problems in System. <br />Please Try again.");
+	// 	}
+	// })
 }
 
 function fn_chkDel(){

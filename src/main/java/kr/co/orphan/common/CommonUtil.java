@@ -125,31 +125,6 @@ public class CommonUtil {
 
     }
 
-    public static List<Map<String, Object>> youtubeClient(int count, String qTitle) throws Exception {
-        WebClient webClient = CommonUtil.getBaseUrl("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults="+count+"&q="+qTitle+"&key=AIzaSyDBu3opwfLYQFX_n5amH7YYJhb6A9IQeCc");
-        String token = webClient.get()
-                .uri("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults="+count+"&q="+qTitle+"&key=AIzaSyDBu3opwfLYQFX_n5amH7YYJhb6A9IQeCc")
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
-        JSONParser jsonParser = new JSONParser();
-
-        JSONObject jsonObj = (JSONObject) jsonParser.parse(token);
-        JSONArray memberArray = (JSONArray) jsonObj.get("items");
-        List<Map<String, Object>> infoList = new ArrayList<>();
-        for(int i=0; i<memberArray.size(); i++){
-            Map<String,Object> hMap = new HashMap<>();
-            JSONObject tempObj = (JSONObject) memberArray.get(i);
-            JSONObject memberArray1 = (JSONObject) tempObj.get("id");
-            JSONObject title = (JSONObject) tempObj.get("snippet");
-            hMap.put("videoId",memberArray1.get("videoId"));
-            hMap.put("title",title.get("title"));
-            hMap.put("channelTitle",title.get("channelTitle"));
-            infoList.add(i,hMap);
-        }
-        return infoList;
-    }
-
     public static WebClient getBaseUrl(final String uri) {
         return WebClient.builder()
                 .baseUrl(uri)
@@ -158,4 +133,5 @@ public class CommonUtil {
                 .mutate()
                 .build();
     }
+
 }
